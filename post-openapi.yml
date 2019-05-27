@@ -91,11 +91,11 @@ paths:
               schema:          
                 $ref: '#/components/schemas/UserTokenDTO'
         '400':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/400'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/400'
         '409':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/409'               
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/409'               
         '500':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/500'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/500'       
 
   /api/auth/refresh:
     post:
@@ -125,11 +125,11 @@ paths:
               schema:          
                 $ref: '#/components/schemas/UserTokenDTO'
         '400':
-          $ref: https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/400'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/400'
         '409':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/409'               
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/409'               
         '500':
-          $ref: https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/500'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/500'       
 
   /api/configurations:
     get:
@@ -139,10 +139,10 @@ paths:
         "Get a list of configurations"
       operationId: retrieveUsingGET_1
       parameters:
-        - $ref: '#/components/parameters/fieldsParam'
-        - $ref: '#/components/parameters/filtersParam'        
-        - $ref: '#/components/parameters/offsetParam'
-        - $ref: '#/components/parameters/limitParam'     
+        - $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/parameters/fieldsParam'
+        - $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/parameters/filtersParam'        
+        - $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/parameters/offsetParam'
+        - $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/parameters/limitParam'     
       responses:
         '200':
           description: |
@@ -155,25 +155,25 @@ paths:
                   $ref: '#/components/schemas/ConfigGrouping'
           headers:
             Total-Elements:
-              $ref: '#/components/headers/Total-Elements'
+              $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/headers/Total-Elements'
             Total-Pages:
-              $ref: '#/components/headers/Total-Pages'
+              $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/headers/Total-Pages'
             Number-of-Elements:
-              $ref: '#/components/headers/Number-of-Elements'
+              $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/headers/Number-of-Elements'
         '400':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/400'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/400'
         '401':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/401'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/401'
         '404':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/404'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/404'              
         '408':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/408'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/408'              
         '429':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/429'               
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/429'               
         '500':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/500'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/500'       
         '503':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/503'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/503'       
 
     post:
       tags:
@@ -209,21 +209,21 @@ paths:
               schema:          
                 $ref: '#/components/schemas/ConfigGrouping'
         '400':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/400'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/400'
         '401':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/401'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/401'
         '404':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/404'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/404'              
         '408':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/408'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/408'              
         '409':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/409'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/409'              
         '429':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/429'               
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/429'               
         '500':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/500'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/500'       
         '503':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/503'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/503'       
                 
   /api/configurations/{id}:
     get:
@@ -250,19 +250,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConfigGrouping'
         '400':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/400'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/400'
         '401':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/401'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/401'
         '404':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/404'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/404'              
         '408':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/408'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/408'              
         '429':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/429'               
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/429'               
         '500':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/500'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/500'       
         '503':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/503'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/503'       
                 
     put:
       tags:
@@ -293,19 +293,19 @@ paths:
           description: |
             "No Content - The request was successful, we created a new resource and the response body does not contains the representation."
         '400':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/400'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/400'
         '401':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/401'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/401'
         '404':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/404'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/404'              
         '408':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/408'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/408'              
         '429':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/429'               
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/429'               
         '500':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/500'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/500'       
         '503':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/503'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/503'       
               
     delete:
       tags:
@@ -329,18 +329,46 @@ paths:
           description: |
             "OK - The request was successful; the resource was deleted."
         '401':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/401'
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/401'
         '404':
-          $ref: https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/404'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/404'              
         '408':
-          $ref: https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/408'              
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/408'              
         '429':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/429'               
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/429'               
         '500':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/500'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/500'       
         '503':
-          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml#/components/responses/503'       
+          $ref: 'https://raw.githubusercontent.com/jquetar/spec-api/master/commons.yml#/components/responses/503'       
 components:
+  securitySchemes:
+    basicAuth:     
+      type: http
+      scheme: basic  
+    JWT:
+      description: ""
+      type: "apiKey"
+      name: "JWT-Assertion"
+      in: "header"
+    bearer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
+    bearerAuth:
+      type: http
+      scheme: bearer
+    tui_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: http://swagger.io/api/oauth/dialog
+          scopes:
+            admin: admin scope
+            user: user scope
   schemas:
     OauthRequestDTO:
       type: object
