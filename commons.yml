@@ -1,0 +1,170 @@
+openapi: 3.0.0
+info:
+  title: Common components
+  version: 1.0.0
+paths: {}
+
+# Put your common components here:
+components:
+  securitySchemes:
+    basicAuth:     
+      type: http
+      scheme: basic  
+    JWT:
+      description: ""
+      type: "apiKey"
+      name: "JWT-Assertion"
+      in: "header"
+    bearer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
+    bearerAuth:
+      type: http
+      scheme: bearer
+    tui_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: http://swagger.io/api/oauth/dialog
+          scopes:
+            admin: admin scope
+            user: user scope
+  headers:
+    Total-Elements: 
+      description: Total number of items in query
+      schema:
+        type: integer
+        example: 100
+    Total-Pages:
+      description: pages total of query
+      schema:
+        type: integer
+        example: 100
+    Number-of-Elements:
+      description: number of items returns query
+      schema:
+        type: integer
+        example: 100
+  parameters:
+    fieldsParam:
+      name: fields
+      in: query
+      description: fields to project
+      required: false
+      style: form
+      schema:
+        type: array
+        items:
+          type: string
+      example:           
+    filtersParam:
+      name: filters
+      in: query
+      description: operations to filter
+      required: false
+      style: form
+      schema:
+        type: array
+        items:
+          type: string
+      example: 
+    limitParam:  
+      name: limit
+      in: query
+      description: nº items to
+      required: false
+      style: form
+      schema:
+        type: integer
+        format: int64
+      example: 50          
+    offsetParam:
+      name: offset
+      in: query
+      description: offset of items 
+      required: false
+      style: form
+      schema:
+        type: integer
+        format: int64
+      example: 10  
+  schemas:
+    ErrorDTO:
+      type: object
+      required:
+        - status
+      properties:
+        date:
+          type: string
+          format: date-time
+          example: 2017-07-21T17:32:28Z
+        status:
+          type: integer
+          format: int64
+          example: 500
+        code:
+          type: string
+          example: PR-ERROR-000500
+        message:
+          type: string
+          example: Internal server error
+        moreinfo:
+          type: string
+          example: Internal server error
+        user_message:
+          type: string
+          example: Internal server error
+  responses:
+    400:
+      description: "Bad Request - The data given in the PUT failed validation. Inspect the response body for details."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'
+    401:
+      description: "Unauthorized - The supplied credentials, if any, are not sufficient to access the resource."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'
+    404:
+      description: "Not found"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'            
+    408:
+      description: "Request Timeout"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'   
+    409:
+      description: "Conflict - The request could not be processed because of conflict in the request"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'            
+    429:
+      description: "Too Many Requests - Your application is sending too many simultaneous requests."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'            
+    500:
+      description: "Internal Server Error - We couldn't create the resource. Please try again."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'
+    503:
+      description: Service Unavailable - We are temporarily unable to return the representation. Please wait for a bit and try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'
