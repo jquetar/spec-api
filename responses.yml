@@ -1,3 +1,38 @@
+openapi: 3.0.0
+info:
+  title: Common components
+  version: 1.0.0
+paths: {}
+
+# Put your common components here:
+components:
+  schemas:
+    ErrorDTO:
+      type: object
+      required:
+        - status
+      properties:
+        date:
+          type: string
+          format: date-time
+          example: 2017-07-21T17:32:28Z
+        status:
+          type: integer
+          format: int64
+          example: 500
+        code:
+          type: string
+          example: PR-ERROR-000500
+        message:
+          type: string
+          example: Internal server error
+        moreinfo:
+          type: string
+          example: Internal server error
+        user_message:
+          type: string
+          example: Internal server error
+
   responses:
     400:
       description: "Bad Request - The data given in the PUT failed validation. Inspect the response body for details."
