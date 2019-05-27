@@ -1,4 +1,3 @@
-  responses:
     400:
       description: "Bad Request - The data given in the PUT failed validation. Inspect the response body for details."
       content:
