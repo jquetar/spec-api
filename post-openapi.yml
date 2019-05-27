@@ -1,0 +1,624 @@
+﻿openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Openapi Pos-revolution
+  description: Pos-revolution api
+  termsOfService: http://tui-dx.com/terms/
+  contact:
+    name: Pos-revolution api team
+    email: apiteam@tui-dx.com
+    url: http://tui-dx.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://tui-nonprod-group-test.apigee.net
+  description: Test server
+- url: http://tui-nonprod-sandbox.apigee.net
+  description: Pre server
+security:
+  - JWT: []
+  - bearerAuth: []
+#  - OauthSecurity:
+#    - user
+
+tags:
+  - name: "Authentication"
+    description: "Authentication Token API"
+  - name: "Pos-Revolution configuration"
+    description: "Pos-Revolution configuration operations"
+
+paths:
+  /oauth/client_credential/accesstoken:
+    post:
+      tags:
+        - Oauth2
+      description: |
+       "Obtain an oauth2 token to connect to the API"
+      operationId: createOauthTokenClientCredentialUsingPOST
+      parameters:
+        - name: grant_type
+          in: path
+          description: grant type 
+          required: true
+          schema:
+            type: string
+            example: client_credentials
+      requestBody:
+        description: AccessTokenClient
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OauthRequestDTO'
+      responses:
+        '200':
+          description: |
+            "OK - The request was successful and the response body contains the representation requested."
+          content:
+            application/json:    
+              schema:
+                $ref: '#/components/schemas/TokenDTO'
+  /api/auth/login:
+    post:
+      tags:
+        - Authentication
+      security:
+        - bearerAuth: []
+
+      description: |
+        "Create a new web token resource"
+      operationId: createAuthenticationTokenUsingPOST
+      requestBody:
+        description: Autentificación
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationRequestDTO'
+      responses:
+        '200':
+          description: |
+            "OK - The request was successful and the response body contains the representation requested."
+          content:
+            application/json:
+              schema:          
+                $ref: '#/components/schemas/UserTokenDTO'
+        '201':
+          description: "Created"
+          content:
+            application/json:
+              schema:          
+                $ref: '#/components/schemas/UserTokenDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '409':
+          $ref: '#/components/responses/409'               
+        '500':
+          $ref: '#/components/responses/500'       
+
+  /api/auth/refresh:
+    post:
+      tags:
+        - Authentication
+      description: |
+        "Refresh a new web token resource"
+      operationId: refreshAuthenticationTokenUsingPOST
+      parameters:
+        - in: header
+          name: JWT-Assertion
+          required: true
+          schema:
+            $ref: '#/components/schemas/UserTokenDTO'
+      responses:
+        '200':
+          description: |
+            "OK - The request was successful and the response body contains the representation requested."
+          content:
+            application/json:
+              schema:          
+                $ref: '#/components/schemas/UserTokenDTO'
+        '201':
+          description: "Created"
+          content:
+            application/json:
+              schema:          
+                $ref: '#/components/schemas/UserTokenDTO'
+        '400':
+          $ref: '#/components/responses/400'
+        '409':
+          $ref: '#/components/responses/409'               
+        '500':
+          $ref: '#/components/responses/500'       
+
+  /api/configurations:
+    get:
+      tags:
+        - Pos-Revolution configuration
+      description: |
+        "Get a list of configurations"
+      operationId: retrieveUsingGET_1
+      parameters:
+        - $ref: '#/components/parameters/fieldsParam'
+        - $ref: '#/components/parameters/filtersParam'        
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'     
+      responses:
+        '200':
+          description: |
+            "OK - The request was successful and the response body contains the representation requested."
+          content:
+            application/vnd.configuration-api.v1+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfigGrouping'
+          headers:
+            Total-Elements:
+              $ref: '#/components/headers/Total-Elements'
+            Total-Pages:
+              $ref: '#/components/headers/Total-Pages'
+            Number-of-Elements:
+              $ref: '#/components/headers/Number-of-Elements'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'              
+        '408':
+          $ref: '#/components/responses/408'              
+        '429':
+          $ref: '#/components/responses/429'               
+        '500':
+          $ref: '#/components/responses/500'       
+        '503':
+          $ref: '#/components/responses/503'       
+
+    post:
+      tags:
+        - Pos-Revolution configuration
+      description: |
+        "Create a new configuration"
+      operationId: createUsingPOST
+      requestBody:
+        description: Configuration 
+        required: true
+        content:
+          application/vnd.configuration-api.v1+json:
+            schema:
+              $ref: '#/components/schemas/NewConfigGrouping'
+      responses:
+        '200':
+          description: |
+            "OK - The request was successful and the response body contains the representation requested."
+          content:
+            application/vnd.configuration-api.v1+json:
+              schema:          
+                $ref: '#/components/schemas/ConfigGrouping'
+        '201':
+          description: "Created"
+          content:
+            application/json:
+              schema:          
+                $ref: '#/components/schemas/ConfigGrouping'
+        '204':
+          description: "No Content - The request was successful, we created a new resource and the response body does not contains the representation"
+          content:
+            application/vnd.configuration-api.v1+json:
+              schema:          
+                $ref: '#/components/schemas/ConfigGrouping'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'              
+        '408':
+          $ref: '#/components/responses/408'              
+        '409':
+          $ref: '#/components/responses/409'              
+        '429':
+          $ref: '#/components/responses/429'               
+        '500':
+          $ref: '#/components/responses/500'       
+        '503':
+          $ref: '#/components/responses/503'       
+                
+  /api/configurations/{id}:
+    get:
+      tags:
+        - Pos-Revolution configuration
+      description: |
+        "Get a configuration"
+      operationId: retrieveUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id of configuration 
+          required: true
+          schema:
+            type: integer
+            format: int64
+        
+      responses:
+        '200':
+          description: |
+           "OK - The request was successful and the response body contains the representation requested."
+          content:
+            application/vnd.configuration-api.v1+json:
+              schema:
+                $ref: '#/components/schemas/ConfigGrouping'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'              
+        '408':
+          $ref: '#/components/responses/408'              
+        '429':
+          $ref: '#/components/responses/429'               
+        '500':
+          $ref: '#/components/responses/500'       
+        '503':
+          $ref: '#/components/responses/503'       
+                
+    put:
+      tags:
+        - Pos-Revolution configuration
+      description: |
+        "Modification of a configuration"
+      operationId: updateUsingPUT
+      parameters:
+        - name: id
+          in: path
+          description: id of configuration 
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Configuration
+        required: true
+        content:
+          application/vnd.configuration-api.v1+json:
+            schema:
+              $ref: '#/components/schemas/ConfigGrouping'
+      responses:
+        '200':
+          description: |
+            "OK - The request was successful, we updated the resource and the response body contains the representation."
+        '204':
+          description: |
+            "No Content - The request was successful, we created a new resource and the response body does not contains the representation."
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'              
+        '408':
+          $ref: '#/components/responses/408'              
+        '429':
+          $ref: '#/components/responses/429'               
+        '500':
+          $ref: '#/components/responses/500'       
+        '503':
+          $ref: '#/components/responses/503'       
+              
+    delete:
+      tags:
+        - Pos-Revolution configuration
+      description: |
+        "Delete a configuration"
+      operationId: deleteUsingDELETE_4
+      parameters:
+        - name: id
+          in: path
+          description: id of configuration 
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: |
+            "OK."
+        '204':
+          description: |
+            "OK - The request was successful; the resource was deleted."
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'              
+        '408':
+          $ref: '#/components/responses/408'              
+        '429':
+          $ref: '#/components/responses/429'               
+        '500':
+          $ref: '#/components/responses/500'       
+        '503':
+          $ref: '#/components/responses/503'       
+components:
+  securitySchemes:
+    basicAuth:     
+      type: http
+      scheme: basic  
+    JWT:
+      description: ""
+      type: "apiKey"
+      name: "JWT-Assertion"
+      in: "header"
+    bearer-jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
+    bearerAuth:
+      type: http
+      scheme: bearer
+    tui_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: http://swagger.io/api/oauth/dialog
+          scopes:
+            admin: admin scope
+            user: user scope
+  headers:
+    Total-Elements: 
+      description: Total number of items in query
+      schema:
+        type: integer
+        example: 100
+    Total-Pages:
+      description: pages total of query
+      schema:
+        type: integer
+        example: 100
+    Number-of-Elements:
+      description: number of items returns query
+      schema:
+        type: integer
+        example: 100
+  parameters:
+    fieldsParam:
+      name: fields
+      in: query
+      description: fields to project
+      required: false
+      style: form
+      schema:
+        type: array
+        items:
+          type: string
+      example:           
+    filtersParam:
+      name: filters
+      in: query
+      description: operations to filter
+      required: false
+      style: form
+      schema:
+        type: array
+        items:
+          type: string
+      example: 
+    limitParam:  
+      name: limit
+      in: query
+      description: nº items to
+      required: false
+      style: form
+      schema:
+        type: integer
+        format: int64
+      example: 50          
+    offsetParam:
+      name: offset
+      in: query
+      description: offset of items 
+      required: false
+      style: form
+      schema:
+        type: integer
+        format: int64
+      example: 10  
+  schemas:
+    OauthRequestDTO:
+      type: object
+      required:
+        - client_id
+        - client_secret
+      properties:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+    TokenDTO:
+      type: object
+      required: 
+        - refresh_token_expires_in
+        - api_product_list
+        - api_product_list_json
+        - organization_name
+        - developer.email
+        - token_type
+        - issued_at
+        - client_id
+        - access_token
+        - application_name
+        - expires_in
+        - refresh_count
+        - status
+      properties:
+        refresh_token_expires_in:
+          type: array
+          items:
+            type: string
+          example:
+        api_product_list:
+          type: array
+          items:
+            type: string
+          example:
+        organization_name:
+          type: string
+          example: 
+        developer.email:
+          type: string
+          example:
+        token_type:
+          type: string
+          example:
+        issued_at:
+          type: string
+          example:
+        client_id:
+          type: string
+          example:
+        access_token: 
+          type: string
+          example:
+        application_name:
+          type: string
+          example:
+        scope: 
+          type: string
+          example:
+        refresh_count:
+          type: string
+          example:
+        status: 
+          type: string 
+          example:
+    AuthenticationRequestDTO:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example: usuario
+        password:
+          type: string
+          example: password
+    UserTokenDTO:
+      type: object
+      required:
+        - access_token
+        - expires_in
+      properties:
+        access_token:
+          type: string
+          example: 
+        expires_in:
+          type: integer
+          format: int64
+          example:
+    ConfigGrouping:
+      allOf:
+        - $ref: '#/components/schemas/NewConfigGrouping'
+        - required:
+          - id
+      properties:
+        id:
+          type: integer
+          format: int64      
+          example: 33          
+    NewConfigGrouping:
+      type: object
+      required:
+        - go_tui
+        - grouping
+        - value_guarantee
+      properties:
+        child_age_from:
+          type: integer
+          format: int64
+          example: 2
+        child_age_to:
+          type: integer
+          format: int64      
+          example: 9
+        dmc_legal:
+          type: string
+          example: DeLorean Motor Company 
+        french_contact:
+          type: string
+          example: Antoine
+        go_tui:
+          type: boolean
+          example: false
+        value_guarantee:
+          type: boolean
+          example: true
+        currencies:
+          description: Configurated currencies
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyEntity'
+        grouping:
+          $ref: '#/components/schemas/Grouping'
+    Grouping:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64   
+          example: 2
+        name:
+          type: string
+          example: Caribean
+          
+    CurrencyEntity:
+      type: object
+      required:
+        - code
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        code:
+          type: string
+          example: USD
+        name:
+          type: string
+          example: US Dollar
+    ErrorDTO:
+      type: object
+      required:
+        - status
+      properties:
+        date:
+          type: string
+          format: date-time
+          example: 2017-07-21T17:32:28Z
+        status:
+          type: integer
+          format: int64
+          example: 500
+        code:
+          type: string
+          example: PR-ERROR-000500
+        message:
+          type: string
+          example: Internal server error
+        moreinfo:
+          type: string
+          example: Internal server error
+        user_message:
+          type: string
+          example: Internal server error
+  
+  responses:
+    ref: https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml
