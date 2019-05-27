@@ -1,0 +1,49 @@
+  responses:
+    400:
+      description: "Bad Request - The data given in the PUT failed validation. Inspect the response body for details."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'
+    401:
+      description: "Unauthorized - The supplied credentials, if any, are not sufficient to access the resource."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'
+    404:
+      description: "Not found"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'            
+    408:
+      description: "Request Timeout"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'   
+    409:
+      description: "Conflict - The request could not be processed because of conflict in the request"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'            
+    429:
+      description: "Too Many Requests - Your application is sending too many simultaneous requests."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'            
+    500:
+      description: "Internal Server Error - We couldn't create the resource. Please try again."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'
+    503:
+      description: Service Unavailable - We are temporarily unable to return the representation. Please wait for a bit and try again.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDTO'
