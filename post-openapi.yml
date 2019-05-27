@@ -621,4 +621,4 @@ components:
           example: Internal server error
   
   responses:
-    ref: https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml
+    $ref: https://raw.githubusercontent.com/jquetar/spec-api/master/responses.yml
